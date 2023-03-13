@@ -46,7 +46,7 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
     case operation
 
     # OPERATION TYPE = "RECEIVE"
-    when 'Deposit', 'Savings Distribution', 'BNB Vault Rewards'
+    when 'Deposit', 'Savings Distribution', 'BNB Vault Rewards', 'Distribution', 'ETH 2.0 Staking Rewards', 'Savings Distribution', 'Simple Earn Flexible Airdrop', 'Simple Earn Flexible Interest', 'Simple Earn Locked Rewards', 'Staking Redemption', 'Staking Rewards', 'Transaction Buy', 'Transaction Revenue'
       credited_asset = coin
       credited_amount = change
       debited_asset = ''
@@ -55,7 +55,7 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
       fee_amount = ''
 
     # OPERATION TYPE = "SEND"
-    when 'Withdrawal' 
+    when 'Withdraw', 'Simple Earn Flexible Subscription', 'Simple Earn Locked Subscription', 'Staking Purchase', 'Transaction Related', 'Transaction Sold', 'Transaction Spend'
       credited_asset = ''
       credited_amount = ''
       debited_asset = coin
@@ -63,8 +63,27 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
       fee_asset = ''
       fee_amount = ''
 
-    # SPECIAL CASE: OPERATION TYPE = "TRADE"
-    when 'Binance Convert'  
+    # SPECIAL CASES - OPERATION TYPE = "SEND or RECEIVE" 
+    # despite occuring at the same time, both transactions must remain separate as these are not trades!
+    when 'ETH 2.0 Staking', 'Simple Earn Flexible Redemption' 
+      if change > 0
+        credited_asset = coin
+        credited_amount = change
+        debited_asset = ''
+        debited_amount = ''
+        fee_asset = ''
+        fee_amount = ''
+      elsif change < 0
+        credited_asset = ''
+        credited_amount = ''
+        debited_asset = coin
+        debited_amount = change
+        fee_asset = ''
+        fee_amount = ''
+      end
+
+    # SPECIAL CASES - OPERATION TYPE = "TRADE"
+    when 'Binance Convert', 'Small Assets Exchange BNB', 'Stablecoins Auto-Conversion'
       if change > 0
         credited_asset = coin
         credited_amount = change
@@ -112,17 +131,30 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
       fee_asset = coin
       fee_amount = change
     end
+
+    # # Create an array for the modified transaction
+    # modified_transaction = [platform, timestamp, account, operation, credited_asset, credited_amount, debited_asset, debited_amount, fee_asset, fee_amount, remark]
+
+    # # Write the modified transaction to the new CSV file
+    # csv << modified_transaction
+
+    puts "change.class = "
+    puts change.class
+    puts "- - - - -"
+
   end
 end
 
 
 
-#########################################################################
+################################################################################
 =begin
 
 
 NEXT STEPS:
 STEP 3 => Iterate through each transaction to find related transactions and compile them into a single line.
+              -> "Small Assets Exchange BNB" operations will need to be identified one by one 
+                  (using the price of each ASSET/BNB pair at that specific timestamp it shouldn't be too hard).
 
 
 =end
