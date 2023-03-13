@@ -14,6 +14,7 @@ The format of the modified .csv file (its headers) should be generic so that it 
 
 1. Create a new folder.
 2. Clone this repo inside your new folder, and add your Binance 'Transaction History' .csv file inside this folder.
+   -> your binance file should look like this: "part-00000-8aae60e2-9a76-4765-98b2-9d4f5ff6eff8-c000.csv"
 3. Open "binance-CSV-editor.rb" in your IDE and modify: transactions_set_to_be_modified = 'your-Binance-Transaction-History-file.csv' according to the name of <em>'your-Binance-Transaction-History-file'</em>.
 4. Open the folder in a Terminal window,and run the following command:<br><code>$ ruby binance-CSV-editor.rb</code>
 5. Check your folder: it now includes 'modified_binance_transactions_set.csv' with all your Binance transactions, each taking a single row of the table.

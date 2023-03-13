@@ -19,7 +19,7 @@ STEP 2 => Make sure that each transaction's details are  going into the right co
 require 'csv'
 
 # Assign the original binance file to a variable:
-transactions_set_to_be_modified = 'binance_transactions-year_2021.csv' # <= /!\ REPLACE 'binance_transactions-year_2021.csv' WITH THE NAME OF YOUR BINANCE TRANSACTION HISTORY FILE /!\ 
+transactions_set_to_be_modified = 'binance-year-2023.csv' # <= /!\ REPLACE 'binance_transactions-year_2021.csv' WITH THE NAME OF YOUR BINANCE TRANSACTION HISTORY FILE /!\ 
 # Read the transactions set to be modified:
 transactions = CSV.read(transactions_set_to_be_modified)
 # Create a new CSV file named 'modified_binance_transactions_set.csv':
@@ -41,6 +41,13 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
     change = transaction[5]
     remark = transaction[6]
 
+    puts "transaction[5] = "
+    puts transaction[5]
+    puts "change.class = "
+    puts change.class
+    puts "- - - - -"
+
+=begin
     # Define the credited asset & amount, the debited asset & amount, 
     # and eventual fee asset & amount for the transaction, depending of its type of 'Operation'
     case operation
@@ -131,6 +138,7 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
       fee_asset = coin
       fee_amount = change
     end
+=end
 
     # # Create an array for the modified transaction
     # modified_transaction = [platform, timestamp, account, operation, credited_asset, credited_amount, debited_asset, debited_amount, fee_asset, fee_amount, remark]
@@ -138,9 +146,9 @@ CSV.open('modified_binance_transactions_set.csv', 'w') do |csv|
     # # Write the modified transaction to the new CSV file
     # csv << modified_transaction
 
-    puts "change.class = "
-    puts change.class
-    puts "- - - - -"
+    # puts "change.class = "
+    # puts change.class
+    # puts "- - - - -"
 
   end
 end
