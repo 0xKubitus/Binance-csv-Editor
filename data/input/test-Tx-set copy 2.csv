@@ -1,0 +1,16 @@
+User_ID,UTC_Time,Account,Operation,Coin,Change,Remark
+Binance,2022-03-06 14:48:53,Spot,Transaction Sold,"","",CELO,-19.4,"","",""
+Binance,2021-10-19 22:16:09,SPOT,Transaction Spend,"","",EUR,-246.519,"","",""
+Binance,2022-01-13 L01:19:20,Spot,Deposit,EUR,196.2,"","","","",""
+Binance,2022-03-07 03:42:29,Earn,Simple Earn Flexible Interest,USDT,0.00319514,"","","","",""
+Binance,2021-10-19 22:16:09,SPOT,Fee,"","","","",EGLD,-0.00126,""
+Binance,2022-01-13 03:35:47,Earn,Simple Earn Flexible Interest,CAKE,0.00168168,"","","","",""
+Binance,2021-10-19 22:16:09,SPOT,Transaction Buy,EGLD,1.26,"","","","",""
+Binance,2022-03-06 14:48:53,Spot,Transaction Revenue,USDT,95.58,"","","","",""
+Binance,2022-03-06 14:48:53,Spot,Fee,"","","","",USDT,-0.09558,""
+Binance,2021-12-29 00:57:42,SPOT,Withdraw,"","",BNB,-0.01698725,"","",Withdraw fee is included
+Binance,2022-03-06 14:48:53,Spot,Transaction Revenue,USDT,51.507,"","","","",""
+Binance,2021-10-24 17:15:48,SPOT,Binance Convert,"","",EGLD,-0.33872355,"","",""
+Binance,2022-03-06 14:48:53,Spot,Transaction Sold,"","",CELO,-36.0,"","",""
+Binance,2021-10-24 17:15:48,SPOT,Binance Convert,CAKE,5.0,"","","","",""
+Binance,2022-03-06 14:48:53,Spot,Fee,"","","","",USDT,-0.051507,""

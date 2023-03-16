@@ -1,37 +1,22 @@
-=begin
+# STEP 1: Set appropriate headers to the new .csv file.
+# STEP 2 => Make sure that each transaction's details are  going into the right column of the new .csv file.
 
 
-GOAL = EACH TRANSACTION SHOULD:
-                                -> NOT BE DESTRUCTURED INTO MULTIPLE LINES;
-                                -> BELONG TO ONE OF THESE THREE CATEGORIES = "RECEIVE", "SEND" & "TRADE".
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-STEP 1: Set appropriate headers to the new .csv file = DONE
-STEP 2 => Make sure that each transaction's details are  going into the right column of the new .csv file = DONE
-
-
-=end
 #########################################################################
-
 
 
 require 'csv'
 
 
-def group_all_csv_files
-
-  # Assign the original binance file to a variable:
-  transactions_set_to_be_modified = 'my-binance-transactions-up-to-March-12-2023.csv' # <= /!\ REPLACE 'binance_transactions-year_2021.csv' WITH THE NAME OF YOUR BINANCE TRANSACTION HISTORY FILE /!\
-
+def change_table_format(csv_input_file)
   # Read the transactions set to be modified:
-  transactions = CSV.read(transactions_set_to_be_modified)
+  transactions = CSV.read(csv_input_file)
 
-  # Create a new CSV file named 'all_binance_transactions_grouped-together.csv':
-  CSV.open('all_binance_transactions_grouped-together.csv', 'w') do |csv|
-    
+  # Create a new CSV file named 'modified_transactions.csv':
+  CSV.open('./data/outputs/modified_transactions.csv', 'w') do |csv|
+
     # Write the headers for the modified transactions:
-    csv << ['Platform: Exchange / Wallet', 'UTC_Time', 'Account / Public Address', 'Operation', 'Credited Asset', 'Credited Amount', 'Debited Asset', 'Debited Amount', 'Fee Asset', 'Fee Amount', 'Remark/Comments', 'Tx Id']
+    csv << ['EXCHANGE or WALLET', 'UTC_Time', 'Account or Public Address', 'Operation', 'Credited Asset', 'Credited Amount', 'Debited Asset', 'Debited Amount', 'Fee Asset', 'Fee Amount', 'Remark or Comments', 'Tx Id']
     
     # Loop through each transaction in the original CSV file:
     transactions.each_with_index do |transaction, index|
@@ -46,6 +31,7 @@ def group_all_csv_files
       coin = transaction[4]
       change = transaction[5].to_f
       remark = transaction[6]
+      tx_id = "" # no Tx_ID in Binance, but it has to be there for other transactions like DeFi
 
       puts "transaction[5].class = " # SHOULD BE A COMMENT
       puts transaction[5].class # SHOULD BE A COMMENT
@@ -147,7 +133,7 @@ def group_all_csv_files
 
 
       # Create an array for the modified transaction
-      modified_transaction = [platform, timestamp, account, operation, credited_asset, credited_amount, debited_asset, debited_amount, fee_asset, fee_amount, remark]
+      modified_transaction = [platform, timestamp, account, operation, credited_asset, credited_amount, debited_asset, debited_amount, fee_asset, fee_amount, remark, tx_id]
 
       # Write the modified transaction to the new CSV file
       csv << modified_transaction
@@ -158,20 +144,12 @@ def group_all_csv_files
 
     end
   end
+
+  puts "" # SHOULD BE A COMMENT
+  puts "= = = = =" # SHOULD BE A COMMENT
+  puts "=> 'modified_transactions.csv' successfully created inside './data/outputs/' folder!" # SHOULD BE A COMMENT
+  puts "= = = = =" # SHOULD BE A COMMENT
+      
 end
-
-
-
-################################################################################
-=begin
-
-
-NEXT STEPS:
-STEP 3 => Iterate through each transaction to find related transactions and compile them into a single line.
-              -> "Small Assets Exchange BNB" operations will need to be identified one by one 
-                  (using the price of each ASSET/BNB pair at that specific timestamp it shouldn't be too hard).
-
-
-=end
 
 

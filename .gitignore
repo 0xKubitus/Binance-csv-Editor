@@ -1,1 +1,4 @@
-/all_binance_transactions_grouped-together.csv
+/data/input/my-binance-transactions-up-to-March-12-2023.csv
+
+/data/outputs/modified_transactions.csv
+/data/outputs/sorted_transactions.csv
