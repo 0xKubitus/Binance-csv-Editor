@@ -4,7 +4,7 @@ require_relative "./b_sort_transactions_chronologically.rb"
 
 
 # /!\ ON THE LINE BELOW, YOU HAVE TO REPLACE 'test-Tx-set.csv' WITH THE NAME OF YOUR BINANCE TRANSACTION HISTORY FILE /!\
-input_file = "./data/input/test-Tx-set.csv" 
+input_file = "./data/input/test-Tx-set.csv" # <- your binance file should look like this: "part-00000-3aae60e2-5a76-4735-98b2-9d4f5fh6eff8-c000.csv"
 
 
 # STEP1: Change the table's headers: 
